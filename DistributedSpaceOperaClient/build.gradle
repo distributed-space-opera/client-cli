@@ -40,7 +40,7 @@ dependencies {
     runtimeOnly 'io.grpc:grpc-netty-shaded:1.46.0'
     implementation 'io.grpc:grpc-protobuf:1.46.0'
     implementation 'io.grpc:grpc-stub:1.46.0'
-    compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
     implementation group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
     implementation("com.google.guava:guava:31.1-jre")
     implementation 'io.perfmark:perfmark-api:0.25.0'
@@ -51,12 +51,16 @@ test {
     useJUnitPlatform()
 }
 
-task runServer(type:JavaExec) {
+task uploadFile(type:JavaExec) {
     main = 'grpc.route.server.RequestServiceImpl'
     classpath = sourceSets.main.runtimeClasspath
 }
 
-task runClient(type:JavaExec) {
+task downloadFile(type:JavaExec) {
     main = 'grpc.route.client.Client'
+    classpath = sourceSets.main.runtimeClasspath
+}
+task listFiles(type:JavaExec) {
+    main = 'grpc.route.server.RequestServiceImpl'
     classpath = sourceSets.main.runtimeClasspath
 }
