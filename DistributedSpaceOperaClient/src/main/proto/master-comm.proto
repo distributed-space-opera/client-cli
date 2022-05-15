@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.master.protos";
+
+package stream;
+
+service Replication {
+  // Methods required for CLI
+  rpc GetListOfFiles (GetListOfFilesRequest) returns (GetListOfFilesResponse) {}
+}
+
+message GetListOfFilesRequest {
+  repeated string nodeips = 1;  // Send empty string to request list of files from all nodes
+}
+
+message GetListOfFilesResponse {
+  repeated string filenames = 1;
+}
