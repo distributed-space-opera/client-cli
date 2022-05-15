@@ -8,11 +8,13 @@ import org.gateway.protos.Request;
 
 public class AuthenticationClient {
     public static void main(String[] args) {
+        String connectionAddr = args[0];
+        // TODO change temporary port
+        int port = 3000;
         String username = args[1];
         String password = args[2];
 
-        // TODO change temporary port
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(args[0], 3000).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(connectionAddr, port).usePlaintext().build();
 
         AuthenticateGrpc.AuthenticateBlockingStub authenticateBlockingStub = AuthenticateGrpc.newBlockingStub(channel);
 
