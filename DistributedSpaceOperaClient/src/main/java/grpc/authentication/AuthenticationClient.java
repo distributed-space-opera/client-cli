@@ -9,10 +9,9 @@ import org.gateway.protos.Request;
 public class AuthenticationClient {
     public static void main(String[] args) {
         String connectionAddr = args[0];
-        // TODO change temporary port
-        int port = 3000;
-        String username = args[1];
-        String password = args[2];
+        int port = Integer.parseInt(args[1]);
+        String username = args[2];
+        String password = args[3];
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress(connectionAddr, port).usePlaintext().build();
 
