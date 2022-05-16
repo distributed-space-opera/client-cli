@@ -24,6 +24,16 @@ public final class GatewayComm {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stream_Reply_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_LoginRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_LoginRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_LoginReply_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_LoginReply_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -35,9 +45,13 @@ public final class GatewayComm {
     java.lang.String[] descriptorData = {
       "\n\022gateway-comm.proto\022\006stream\")\n\007Request\022" +
       "\014\n\004name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\031\n\005Reply" +
-      "\022\020\n\010masterip\030\001 \001(\t2<\n\014Authenticate\022,\n\010Re" +
-      "gister\022\017.stream.Request\032\r.stream.Reply\"\000" +
-      "B\026\n\022org.gateway.protosP\001b\006proto3"
+      "\022\020\n\010masterip\030\001 \001(\t\"3\n\014LoginRequest\022\021\n\tcl" +
+      "ient_ip\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"(\n\nLogin" +
+      "Reply\022\013\n\003msg\030\001 \001(\t\022\r\n\005token\030\002 \001(\t2q\n\014Aut" +
+      "henticate\022,\n\010Register\022\017.stream.Request\032\r" +
+      ".stream.Reply\"\000\0223\n\005Login\022\024.stream.LoginR" +
+      "equest\032\022.stream.LoginReply\"\000B\026\n\022org.gate" +
+      "way.protosP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -55,6 +69,18 @@ public final class GatewayComm {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_Reply_descriptor,
         new java.lang.String[] { "Masterip", });
+    internal_static_stream_LoginRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_stream_LoginRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_LoginRequest_descriptor,
+        new java.lang.String[] { "ClientIp", "Password", });
+    internal_static_stream_LoginReply_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_stream_LoginReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_LoginReply_descriptor,
+        new java.lang.String[] { "Msg", "Token", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

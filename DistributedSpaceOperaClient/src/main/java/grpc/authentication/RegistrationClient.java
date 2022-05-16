@@ -6,7 +6,7 @@ import org.gateway.protos.AuthenticateGrpc;
 import org.gateway.protos.Reply;
 import org.gateway.protos.Request;
 
-public class AuthenticationClient {
+public class RegistrationClient {
     public static void main(String[] args) {
         String connectionAddr = args[0];
         int port = Integer.parseInt(args[1]);

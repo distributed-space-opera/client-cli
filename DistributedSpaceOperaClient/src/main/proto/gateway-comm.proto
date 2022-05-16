@@ -7,7 +7,10 @@ option java_package = "org.gateway.protos";
 package stream;
 
 service Authenticate {
+
   rpc Register (Request) returns (Reply) {}
+  rpc Login (LoginRequest) returns (LoginReply) {}
+
 }
 
 // The request message containing the user's name.
@@ -19,4 +22,14 @@ message Request {
 // The response message containing the greetings
 message Reply {
   string masterip = 1;
+}
+
+message LoginRequest {
+  string client_ip=1;
+  string password=2;
+}
+
+message LoginReply {
+  string msg=1;
+  string token=2;
 }

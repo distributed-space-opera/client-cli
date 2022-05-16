@@ -46,6 +46,37 @@ public final class AuthenticateGrpc {
     return getRegisterMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest,
+      org.gateway.protos.LoginReply> getLoginMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Login",
+      requestType = org.gateway.protos.LoginRequest.class,
+      responseType = org.gateway.protos.LoginReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest,
+      org.gateway.protos.LoginReply> getLoginMethod() {
+    io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest, org.gateway.protos.LoginReply> getLoginMethod;
+    if ((getLoginMethod = AuthenticateGrpc.getLoginMethod) == null) {
+      synchronized (AuthenticateGrpc.class) {
+        if ((getLoginMethod = AuthenticateGrpc.getLoginMethod) == null) {
+          AuthenticateGrpc.getLoginMethod = getLoginMethod =
+              io.grpc.MethodDescriptor.<org.gateway.protos.LoginRequest, org.gateway.protos.LoginReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Login"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.LoginRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.LoginReply.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthenticateMethodDescriptorSupplier("Login"))
+              .build();
+        }
+      }
+    }
+    return getLoginMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -101,6 +132,13 @@ public final class AuthenticateGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void login(org.gateway.protos.LoginRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -110,6 +148,13 @@ public final class AuthenticateGrpc {
                 org.gateway.protos.Request,
                 org.gateway.protos.Reply>(
                   this, METHODID_REGISTER)))
+          .addMethod(
+            getLoginMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.gateway.protos.LoginRequest,
+                org.gateway.protos.LoginReply>(
+                  this, METHODID_LOGIN)))
           .build();
     }
   }
@@ -135,6 +180,14 @@ public final class AuthenticateGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getRegisterMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void login(org.gateway.protos.LoginRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -156,6 +209,13 @@ public final class AuthenticateGrpc {
     public org.gateway.protos.Reply register(org.gateway.protos.Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getRegisterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.gateway.protos.LoginReply login(org.gateway.protos.LoginRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLoginMethod(), getCallOptions(), request);
     }
   }
 
@@ -180,9 +240,18 @@ public final class AuthenticateGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getRegisterMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.LoginReply> login(
+        org.gateway.protos.LoginRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_REGISTER = 0;
+  private static final int METHODID_LOGIN = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -204,6 +273,10 @@ public final class AuthenticateGrpc {
         case METHODID_REGISTER:
           serviceImpl.register((org.gateway.protos.Request) request,
               (io.grpc.stub.StreamObserver<org.gateway.protos.Reply>) responseObserver);
+          break;
+        case METHODID_LOGIN:
+          serviceImpl.login((org.gateway.protos.LoginRequest) request,
+              (io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -267,6 +340,7 @@ public final class AuthenticateGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new AuthenticateFileDescriptorSupplier())
               .addMethod(getRegisterMethod())
+              .addMethod(getLoginMethod())
               .build();
         }
       }
