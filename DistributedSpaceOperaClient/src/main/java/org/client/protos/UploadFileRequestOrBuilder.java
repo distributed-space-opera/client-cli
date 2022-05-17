@@ -32,4 +32,16 @@ public interface UploadFileRequestOrBuilder extends
    * @return The payload.
    */
   com.google.protobuf.ByteString getPayload();
+
+  /**
+   * <code>string token = 3;</code>
+   * @return The token.
+   */
+  java.lang.String getToken();
+  /**
+   * <code>string token = 3;</code>
+   * @return The bytes for token.
+   */
+  com.google.protobuf.ByteString
+      getTokenBytes();
 }

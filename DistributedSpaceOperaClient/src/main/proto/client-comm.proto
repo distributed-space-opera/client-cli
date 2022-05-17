@@ -2,10 +2,12 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "org.client.protos";
+//option java_outer_classname = "StreamProto";
 
 package stream;
 
 service Streaming {
+
   rpc UploadFile (stream UploadFileRequest) returns (UploadFileReply) {}
   rpc DownloadFile (DownloadFileRequest) returns (stream DownloadFileReply) {}
 }
@@ -15,6 +17,7 @@ message UploadFileRequest {
   //  TODO add auth jwt token
   string filename = 1;
   bytes payload = 2;
+  string token = 3;
 }
 
 // The response message containing the greetings
@@ -25,6 +28,7 @@ message UploadFileReply {
 message DownloadFileRequest {
   //  TODO add auth jwt token
   string filename = 1;
+  string token = 2;
 }
 
 // The response message containing the greetings

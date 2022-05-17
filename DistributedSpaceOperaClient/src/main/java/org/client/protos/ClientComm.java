@@ -43,16 +43,17 @@ public final class ClientComm {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021client-comm.proto\022\006stream\"6\n\021UploadFil" +
+      "\n\021client-comm.proto\022\006stream\"E\n\021UploadFil" +
       "eRequest\022\020\n\010filename\030\001 \001(\t\022\017\n\007payload\030\002 " +
-      "\001(\014\"!\n\017UploadFileReply\022\016\n\006status\030\001 \001(\t\"\'" +
-      "\n\023DownloadFileRequest\022\020\n\010filename\030\001 \001(\t\"" +
-      "$\n\021DownloadFileReply\022\017\n\007payload\030\002 \001(\0142\235\001" +
-      "\n\tStreaming\022D\n\nUploadFile\022\031.stream.Uploa" +
-      "dFileRequest\032\027.stream.UploadFileReply\"\000(" +
-      "\001\022J\n\014DownloadFile\022\033.stream.DownloadFileR" +
-      "equest\032\031.stream.DownloadFileReply\"\0000\001B\025\n" +
-      "\021org.client.protosP\001b\006proto3"
+      "\001(\014\022\r\n\005token\030\003 \001(\t\"!\n\017UploadFileReply\022\016\n" +
+      "\006status\030\001 \001(\t\"6\n\023DownloadFileRequest\022\020\n\010" +
+      "filename\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\"$\n\021Downloa" +
+      "dFileReply\022\017\n\007payload\030\002 \001(\0142\235\001\n\tStreamin" +
+      "g\022D\n\nUploadFile\022\031.stream.UploadFileReque" +
+      "st\032\027.stream.UploadFileReply\"\000(\001\022J\n\014Downl" +
+      "oadFile\022\033.stream.DownloadFileRequest\032\031.s" +
+      "tream.DownloadFileReply\"\0000\001B\025\n\021org.clien" +
+      "t.protosP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -63,7 +64,7 @@ public final class ClientComm {
     internal_static_stream_UploadFileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_UploadFileRequest_descriptor,
-        new java.lang.String[] { "Filename", "Payload", });
+        new java.lang.String[] { "Filename", "Payload", "Token", });
     internal_static_stream_UploadFileReply_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_stream_UploadFileReply_fieldAccessorTable = new
@@ -75,7 +76,7 @@ public final class ClientComm {
     internal_static_stream_DownloadFileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_DownloadFileRequest_descriptor,
-        new java.lang.String[] { "Filename", });
+        new java.lang.String[] { "Filename", "Token", });
     internal_static_stream_DownloadFileReply_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_stream_DownloadFileReply_fieldAccessorTable = new
