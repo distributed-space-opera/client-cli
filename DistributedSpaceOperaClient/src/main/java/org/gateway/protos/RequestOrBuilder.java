@@ -8,16 +8,16 @@ public interface RequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string name = 1;</code>
-   * @return The name.
+   * <code>string ip = 1;</code>
+   * @return The ip.
    */
-  java.lang.String getName();
+  java.lang.String getIp();
   /**
-   * <code>string name = 1;</code>
-   * @return The bytes for name.
+   * <code>string ip = 1;</code>
+   * @return The bytes for ip.
    */
   com.google.protobuf.ByteString
-      getNameBytes();
+      getIpBytes();
 
   /**
    * <code>string password = 2;</code>
@@ -30,4 +30,24 @@ public interface RequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getPasswordBytes();
+
+  /**
+   * <pre>
+   * NODE or CLIENT
+   * </pre>
+   *
+   * <code>string type = 3;</code>
+   * @return The type.
+   */
+  java.lang.String getType();
+  /**
+   * <pre>
+   * NODE or CLIENT
+   * </pre>
+   *
+   * <code>string type = 3;</code>
+   * @return The bytes for type.
+   */
+  com.google.protobuf.ByteString
+      getTypeBytes();
 }

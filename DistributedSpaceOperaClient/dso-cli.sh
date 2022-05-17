@@ -11,8 +11,8 @@ fi
 
 if [ "$1" == 'upload' ]; then
   args="$2"
-  if [ -z "$2" ] || [ -z "$3"  ] || [ -z "$4"  ] || [ -z "$5"  ] || [ -z "$6"  ]; then
-    echo "usage: ./dso-cli.sh upload <username> <password> <ip_address> <port> <filepath>"
+  if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
+    echo "usage: ./dso-cli.sh upload <token> <ip_address> <port> <filepath>"
   else
     args="$2 $3 $4 $5 $6"
     eval ./gradlew uploadFile --args "$args"
@@ -21,8 +21,28 @@ fi
 
 if [ "$1" == 'download' ]; then
   args="$2"
-  if [ -z "$2" ] || [ -z "$3"  ] || [ -z "$4"  ] || [ -z "$5"  ] || [ -z "$6"  ]; then
-    echo "usage: ./dso-cli.sh download <username> <password> <ip_address> <port> <filename>"
+  if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
+    echo "usage: ./dso-cli.sh download <token> <ip_address> <port> <filename>"
+  else
+    args="$2 $3 $4 $5 $6"
+    eval ./gradlew downloadFile --args "$args"
+  fi
+fi
+
+if [ "$1" == 'login' ]; then
+  args="$2"
+  if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ]; then
+    echo "usage: ./dso-cli.sh download <username> <password> <ip_address> <port>"
+  else
+    args="$2 $3 $4 $5 $6"
+    eval ./gradlew downloadFile --args "$args"
+  fi
+fi
+
+if [ "$1" == 'register' ]; then
+  args="$2"
+  if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ]; then
+    echo "usage: ./dso-cli.sh download <username> <password> <ip_address> <port>"
   else
     args="$2 $3 $4 $5 $6"
     eval ./gradlew downloadFile --args "$args"

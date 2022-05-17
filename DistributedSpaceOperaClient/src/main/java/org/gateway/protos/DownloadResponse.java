@@ -4,28 +4,27 @@
 package org.gateway.protos;
 
 /**
- * Protobuf type {@code stream.Request}
+ * Protobuf type {@code stream.DownloadResponse}
  */
-public final class Request extends
+public final class DownloadResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:stream.Request)
-    RequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:stream.DownloadResponse)
+    DownloadResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Request.newBuilder() to construct.
-  private Request(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use DownloadResponse.newBuilder() to construct.
+  private DownloadResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Request() {
-    ip_ = "";
-    password_ = "";
-    type_ = "";
+  private DownloadResponse() {
+    nodeip_ = "";
+    message_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Request();
+    return new DownloadResponse();
   }
 
   @java.lang.Override
@@ -33,7 +32,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Request(
+  private DownloadResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -54,19 +53,13 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            ip_ = s;
+            nodeip_ = s;
             break;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            password_ = s;
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            type_ = s;
+            message_ = s;
             break;
           }
           default: {
@@ -90,133 +83,103 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.gateway.protos.GatewayComm.internal_static_stream_Request_descriptor;
+    return org.gateway.protos.GatewayComm.internal_static_stream_DownloadResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.gateway.protos.GatewayComm.internal_static_stream_Request_fieldAccessorTable
+    return org.gateway.protos.GatewayComm.internal_static_stream_DownloadResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            org.gateway.protos.Request.class, org.gateway.protos.Request.Builder.class);
+            org.gateway.protos.DownloadResponse.class, org.gateway.protos.DownloadResponse.Builder.class);
   }
 
-  public static final int IP_FIELD_NUMBER = 1;
-  private volatile java.lang.Object ip_;
+  public static final int NODEIP_FIELD_NUMBER = 1;
+  private volatile java.lang.Object nodeip_;
   /**
-   * <code>string ip = 1;</code>
-   * @return The ip.
+   * <pre>
+   * Will return the node information to connect with
+   * </pre>
+   *
+   * <code>string nodeip = 1;</code>
+   * @return The nodeip.
    */
   @java.lang.Override
-  public java.lang.String getIp() {
-    java.lang.Object ref = ip_;
+  public java.lang.String getNodeip() {
+    java.lang.Object ref = nodeip_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      ip_ = s;
+      nodeip_ = s;
       return s;
     }
   }
   /**
-   * <code>string ip = 1;</code>
-   * @return The bytes for ip.
+   * <pre>
+   * Will return the node information to connect with
+   * </pre>
+   *
+   * <code>string nodeip = 1;</code>
+   * @return The bytes for nodeip.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getIpBytes() {
-    java.lang.Object ref = ip_;
+      getNodeipBytes() {
+    java.lang.Object ref = nodeip_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      ip_ = b;
+      nodeip_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int PASSWORD_FIELD_NUMBER = 2;
-  private volatile java.lang.Object password_;
+  public static final int MESSAGE_FIELD_NUMBER = 2;
+  private volatile java.lang.Object message_;
   /**
-   * <code>string password = 2;</code>
-   * @return The password.
+   * <pre>
+   * Will return ERROR or SUCCESS
+   * </pre>
+   *
+   * <code>string message = 2;</code>
+   * @return The message.
    */
   @java.lang.Override
-  public java.lang.String getPassword() {
-    java.lang.Object ref = password_;
+  public java.lang.String getMessage() {
+    java.lang.Object ref = message_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      password_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string password = 2;</code>
-   * @return The bytes for password.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPasswordBytes() {
-    java.lang.Object ref = password_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      password_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int TYPE_FIELD_NUMBER = 3;
-  private volatile java.lang.Object type_;
-  /**
-   * <pre>
-   * NODE or CLIENT
-   * </pre>
-   *
-   * <code>string type = 3;</code>
-   * @return The type.
-   */
-  @java.lang.Override
-  public java.lang.String getType() {
-    java.lang.Object ref = type_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      type_ = s;
+      message_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * NODE or CLIENT
+   * Will return ERROR or SUCCESS
    * </pre>
    *
-   * <code>string type = 3;</code>
-   * @return The bytes for type.
+   * <code>string message = 2;</code>
+   * @return The bytes for message.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getTypeBytes() {
-    java.lang.Object ref = type_;
+      getMessageBytes() {
+    java.lang.Object ref = message_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      type_ = b;
+      message_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -237,14 +200,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ip_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ip_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nodeip_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nodeip_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, type_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
     }
     unknownFields.writeTo(output);
   }
@@ -255,14 +215,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ip_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ip_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nodeip_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nodeip_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, type_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -274,17 +231,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof org.gateway.protos.Request)) {
+    if (!(obj instanceof org.gateway.protos.DownloadResponse)) {
       return super.equals(obj);
     }
-    org.gateway.protos.Request other = (org.gateway.protos.Request) obj;
+    org.gateway.protos.DownloadResponse other = (org.gateway.protos.DownloadResponse) obj;
 
-    if (!getIp()
-        .equals(other.getIp())) return false;
-    if (!getPassword()
-        .equals(other.getPassword())) return false;
-    if (!getType()
-        .equals(other.getType())) return false;
+    if (!getNodeip()
+        .equals(other.getNodeip())) return false;
+    if (!getMessage()
+        .equals(other.getMessage())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -296,80 +251,78 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + IP_FIELD_NUMBER;
-    hash = (53 * hash) + getIp().hashCode();
-    hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
-    hash = (53 * hash) + getPassword().hashCode();
-    hash = (37 * hash) + TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getType().hashCode();
+    hash = (37 * hash) + NODEIP_FIELD_NUMBER;
+    hash = (53 * hash) + getNodeip().hashCode();
+    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getMessage().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Request parseFrom(byte[] data)
+  public static org.gateway.protos.DownloadResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Request parseFrom(java.io.InputStream input)
+  public static org.gateway.protos.DownloadResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.gateway.protos.Request parseDelimitedFrom(java.io.InputStream input)
+  public static org.gateway.protos.DownloadResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Request parseDelimitedFrom(
+  public static org.gateway.protos.DownloadResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Request parseFrom(
+  public static org.gateway.protos.DownloadResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -382,7 +335,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(org.gateway.protos.Request prototype) {
+  public static Builder newBuilder(org.gateway.protos.DownloadResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -398,26 +351,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code stream.Request}
+   * Protobuf type {@code stream.DownloadResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:stream.Request)
-      org.gateway.protos.RequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:stream.DownloadResponse)
+      org.gateway.protos.DownloadResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Request_descriptor;
+      return org.gateway.protos.GatewayComm.internal_static_stream_DownloadResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Request_fieldAccessorTable
+      return org.gateway.protos.GatewayComm.internal_static_stream_DownloadResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.gateway.protos.Request.class, org.gateway.protos.Request.Builder.class);
+              org.gateway.protos.DownloadResponse.class, org.gateway.protos.DownloadResponse.Builder.class);
     }
 
-    // Construct using org.gateway.protos.Request.newBuilder()
+    // Construct using org.gateway.protos.DownloadResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -435,11 +388,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      ip_ = "";
+      nodeip_ = "";
 
-      password_ = "";
-
-      type_ = "";
+      message_ = "";
 
       return this;
     }
@@ -447,17 +398,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Request_descriptor;
+      return org.gateway.protos.GatewayComm.internal_static_stream_DownloadResponse_descriptor;
     }
 
     @java.lang.Override
-    public org.gateway.protos.Request getDefaultInstanceForType() {
-      return org.gateway.protos.Request.getDefaultInstance();
+    public org.gateway.protos.DownloadResponse getDefaultInstanceForType() {
+      return org.gateway.protos.DownloadResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public org.gateway.protos.Request build() {
-      org.gateway.protos.Request result = buildPartial();
+    public org.gateway.protos.DownloadResponse build() {
+      org.gateway.protos.DownloadResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -465,11 +416,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public org.gateway.protos.Request buildPartial() {
-      org.gateway.protos.Request result = new org.gateway.protos.Request(this);
-      result.ip_ = ip_;
-      result.password_ = password_;
-      result.type_ = type_;
+    public org.gateway.protos.DownloadResponse buildPartial() {
+      org.gateway.protos.DownloadResponse result = new org.gateway.protos.DownloadResponse(this);
+      result.nodeip_ = nodeip_;
+      result.message_ = message_;
       onBuilt();
       return result;
     }
@@ -508,26 +458,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.gateway.protos.Request) {
-        return mergeFrom((org.gateway.protos.Request)other);
+      if (other instanceof org.gateway.protos.DownloadResponse) {
+        return mergeFrom((org.gateway.protos.DownloadResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(org.gateway.protos.Request other) {
-      if (other == org.gateway.protos.Request.getDefaultInstance()) return this;
-      if (!other.getIp().isEmpty()) {
-        ip_ = other.ip_;
+    public Builder mergeFrom(org.gateway.protos.DownloadResponse other) {
+      if (other == org.gateway.protos.DownloadResponse.getDefaultInstance()) return this;
+      if (!other.getNodeip().isEmpty()) {
+        nodeip_ = other.nodeip_;
         onChanged();
       }
-      if (!other.getPassword().isEmpty()) {
-        password_ = other.password_;
-        onChanged();
-      }
-      if (!other.getType().isEmpty()) {
-        type_ = other.type_;
+      if (!other.getMessage().isEmpty()) {
+        message_ = other.message_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -545,11 +491,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      org.gateway.protos.Request parsedMessage = null;
+      org.gateway.protos.DownloadResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (org.gateway.protos.Request) e.getUnfinishedMessage();
+        parsedMessage = (org.gateway.protos.DownloadResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -559,174 +505,118 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object ip_ = "";
+    private java.lang.Object nodeip_ = "";
     /**
-     * <code>string ip = 1;</code>
-     * @return The ip.
+     * <pre>
+     * Will return the node information to connect with
+     * </pre>
+     *
+     * <code>string nodeip = 1;</code>
+     * @return The nodeip.
      */
-    public java.lang.String getIp() {
-      java.lang.Object ref = ip_;
+    public java.lang.String getNodeip() {
+      java.lang.Object ref = nodeip_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        ip_ = s;
+        nodeip_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string ip = 1;</code>
-     * @return The bytes for ip.
+     * <pre>
+     * Will return the node information to connect with
+     * </pre>
+     *
+     * <code>string nodeip = 1;</code>
+     * @return The bytes for nodeip.
      */
     public com.google.protobuf.ByteString
-        getIpBytes() {
-      java.lang.Object ref = ip_;
+        getNodeipBytes() {
+      java.lang.Object ref = nodeip_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        ip_ = b;
+        nodeip_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string ip = 1;</code>
-     * @param value The ip to set.
+     * <pre>
+     * Will return the node information to connect with
+     * </pre>
+     *
+     * <code>string nodeip = 1;</code>
+     * @param value The nodeip to set.
      * @return This builder for chaining.
      */
-    public Builder setIp(
+    public Builder setNodeip(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      ip_ = value;
+      nodeip_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 1;</code>
+     * <pre>
+     * Will return the node information to connect with
+     * </pre>
+     *
+     * <code>string nodeip = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearIp() {
+    public Builder clearNodeip() {
       
-      ip_ = getDefaultInstance().getIp();
+      nodeip_ = getDefaultInstance().getNodeip();
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 1;</code>
-     * @param value The bytes for ip to set.
+     * <pre>
+     * Will return the node information to connect with
+     * </pre>
+     *
+     * <code>string nodeip = 1;</code>
+     * @param value The bytes for nodeip to set.
      * @return This builder for chaining.
      */
-    public Builder setIpBytes(
+    public Builder setNodeipBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      ip_ = value;
+      nodeip_ = value;
       onChanged();
       return this;
     }
 
-    private java.lang.Object password_ = "";
-    /**
-     * <code>string password = 2;</code>
-     * @return The password.
-     */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        password_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @return The bytes for password.
-     */
-    public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @param value The password to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPassword(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      password_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPassword() {
-      
-      password_ = getDefaultInstance().getPassword();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @param value The bytes for password to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPasswordBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      password_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object type_ = "";
+    private java.lang.Object message_ = "";
     /**
      * <pre>
-     * NODE or CLIENT
+     * Will return ERROR or SUCCESS
      * </pre>
      *
-     * <code>string type = 3;</code>
-     * @return The type.
+     * <code>string message = 2;</code>
+     * @return The message.
      */
-    public java.lang.String getType() {
-      java.lang.Object ref = type_;
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        type_ = s;
+        message_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -734,20 +624,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * NODE or CLIENT
+     * Will return ERROR or SUCCESS
      * </pre>
      *
-     * <code>string type = 3;</code>
-     * @return The bytes for type.
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
-        getTypeBytes() {
-      java.lang.Object ref = type_;
+        getMessageBytes() {
+      java.lang.Object ref = message_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        type_ = b;
+        message_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -755,54 +645,54 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * NODE or CLIENT
+     * Will return ERROR or SUCCESS
      * </pre>
      *
-     * <code>string type = 3;</code>
-     * @param value The type to set.
+     * <code>string message = 2;</code>
+     * @param value The message to set.
      * @return This builder for chaining.
      */
-    public Builder setType(
+    public Builder setMessage(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      type_ = value;
+      message_ = value;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * NODE or CLIENT
+     * Will return ERROR or SUCCESS
      * </pre>
      *
-     * <code>string type = 3;</code>
+     * <code>string message = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearType() {
+    public Builder clearMessage() {
       
-      type_ = getDefaultInstance().getType();
+      message_ = getDefaultInstance().getMessage();
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * NODE or CLIENT
+     * Will return ERROR or SUCCESS
      * </pre>
      *
-     * <code>string type = 3;</code>
-     * @param value The bytes for type to set.
+     * <code>string message = 2;</code>
+     * @param value The bytes for message to set.
      * @return This builder for chaining.
      */
-    public Builder setTypeBytes(
+    public Builder setMessageBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      type_ = value;
+      message_ = value;
       onChanged();
       return this;
     }
@@ -819,41 +709,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:stream.Request)
+    // @@protoc_insertion_point(builder_scope:stream.DownloadResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:stream.Request)
-  private static final org.gateway.protos.Request DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:stream.DownloadResponse)
+  private static final org.gateway.protos.DownloadResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new org.gateway.protos.Request();
+    DEFAULT_INSTANCE = new org.gateway.protos.DownloadResponse();
   }
 
-  public static org.gateway.protos.Request getDefaultInstance() {
+  public static org.gateway.protos.DownloadResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Request>
-      PARSER = new com.google.protobuf.AbstractParser<Request>() {
+  private static final com.google.protobuf.Parser<DownloadResponse>
+      PARSER = new com.google.protobuf.AbstractParser<DownloadResponse>() {
     @java.lang.Override
-    public Request parsePartialFrom(
+    public DownloadResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Request(input, extensionRegistry);
+      return new DownloadResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Request> parser() {
+  public static com.google.protobuf.Parser<DownloadResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Request> getParserForType() {
+  public com.google.protobuf.Parser<DownloadResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public org.gateway.protos.Request getDefaultInstanceForType() {
+  public org.gateway.protos.DownloadResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

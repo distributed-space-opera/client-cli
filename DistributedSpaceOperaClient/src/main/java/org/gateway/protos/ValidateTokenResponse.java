@@ -4,28 +4,26 @@
 package org.gateway.protos;
 
 /**
- * Protobuf type {@code stream.Reply}
+ * Protobuf type {@code stream.ValidateTokenResponse}
  */
-public final class Reply extends
+public final class ValidateTokenResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:stream.Reply)
-    ReplyOrBuilder {
+    // @@protoc_insertion_point(message_implements:stream.ValidateTokenResponse)
+    ValidateTokenResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Reply.newBuilder() to construct.
-  private Reply(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use ValidateTokenResponse.newBuilder() to construct.
+  private ValidateTokenResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Reply() {
-    masterip_ = "";
+  private ValidateTokenResponse() {
     message_ = "";
-    token_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Reply();
+    return new ValidateTokenResponse();
   }
 
   @java.lang.Override
@@ -33,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Reply(
+  private ValidateTokenResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -54,19 +52,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            masterip_ = s;
-            break;
-          }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-
             message_ = s;
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            token_ = s;
             break;
           }
           default: {
@@ -90,63 +76,25 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.gateway.protos.GatewayComm.internal_static_stream_Reply_descriptor;
+    return org.gateway.protos.GatewayComm.internal_static_stream_ValidateTokenResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.gateway.protos.GatewayComm.internal_static_stream_Reply_fieldAccessorTable
+    return org.gateway.protos.GatewayComm.internal_static_stream_ValidateTokenResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            org.gateway.protos.Reply.class, org.gateway.protos.Reply.Builder.class);
+            org.gateway.protos.ValidateTokenResponse.class, org.gateway.protos.ValidateTokenResponse.Builder.class);
   }
 
-  public static final int MASTERIP_FIELD_NUMBER = 1;
-  private volatile java.lang.Object masterip_;
-  /**
-   * <code>string masterip = 1;</code>
-   * @return The masterip.
-   */
-  @java.lang.Override
-  public java.lang.String getMasterip() {
-    java.lang.Object ref = masterip_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      masterip_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string masterip = 1;</code>
-   * @return The bytes for masterip.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getMasteripBytes() {
-    java.lang.Object ref = masterip_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      masterip_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int MESSAGE_FIELD_NUMBER = 2;
+  public static final int MESSAGE_FIELD_NUMBER = 1;
   private volatile java.lang.Object message_;
   /**
    * <pre>
-   * Will return ERROR or SUCCESS
+   * returns VALID or INVALID
    * </pre>
    *
-   * <code>string message = 2;</code>
+   * <code>string message = 1;</code>
    * @return The message.
    */
   @java.lang.Override
@@ -164,10 +112,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Will return ERROR or SUCCESS
+   * returns VALID or INVALID
    * </pre>
    *
-   * <code>string message = 2;</code>
+   * <code>string message = 1;</code>
    * @return The bytes for message.
    */
   @java.lang.Override
@@ -179,52 +127,6 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       message_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int TOKEN_FIELD_NUMBER = 3;
-  private volatile java.lang.Object token_;
-  /**
-   * <pre>
-   * Valid for 1 hour
-   * </pre>
-   *
-   * <code>string token = 3;</code>
-   * @return The token.
-   */
-  @java.lang.Override
-  public java.lang.String getToken() {
-    java.lang.Object ref = token_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      token_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   * Valid for 1 hour
-   * </pre>
-   *
-   * <code>string token = 3;</code>
-   * @return The bytes for token.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getTokenBytes() {
-    java.lang.Object ref = token_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      token_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -245,14 +147,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(masterip_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, masterip_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, token_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
     }
     unknownFields.writeTo(output);
   }
@@ -263,14 +159,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(masterip_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, masterip_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, token_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -282,17 +172,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof org.gateway.protos.Reply)) {
+    if (!(obj instanceof org.gateway.protos.ValidateTokenResponse)) {
       return super.equals(obj);
     }
-    org.gateway.protos.Reply other = (org.gateway.protos.Reply) obj;
+    org.gateway.protos.ValidateTokenResponse other = (org.gateway.protos.ValidateTokenResponse) obj;
 
-    if (!getMasterip()
-        .equals(other.getMasterip())) return false;
     if (!getMessage()
         .equals(other.getMessage())) return false;
-    if (!getToken()
-        .equals(other.getToken())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -304,80 +190,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + MASTERIP_FIELD_NUMBER;
-    hash = (53 * hash) + getMasterip().hashCode();
     hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
     hash = (53 * hash) + getMessage().hashCode();
-    hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-    hash = (53 * hash) + getToken().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Reply parseFrom(byte[] data)
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.gateway.protos.Reply parseFrom(java.io.InputStream input)
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.gateway.protos.Reply parseDelimitedFrom(java.io.InputStream input)
+  public static org.gateway.protos.ValidateTokenResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Reply parseDelimitedFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.gateway.protos.Reply parseFrom(
+  public static org.gateway.protos.ValidateTokenResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -390,7 +272,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(org.gateway.protos.Reply prototype) {
+  public static Builder newBuilder(org.gateway.protos.ValidateTokenResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -406,26 +288,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code stream.Reply}
+   * Protobuf type {@code stream.ValidateTokenResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:stream.Reply)
-      org.gateway.protos.ReplyOrBuilder {
+      // @@protoc_insertion_point(builder_implements:stream.ValidateTokenResponse)
+      org.gateway.protos.ValidateTokenResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Reply_descriptor;
+      return org.gateway.protos.GatewayComm.internal_static_stream_ValidateTokenResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Reply_fieldAccessorTable
+      return org.gateway.protos.GatewayComm.internal_static_stream_ValidateTokenResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.gateway.protos.Reply.class, org.gateway.protos.Reply.Builder.class);
+              org.gateway.protos.ValidateTokenResponse.class, org.gateway.protos.ValidateTokenResponse.Builder.class);
     }
 
-    // Construct using org.gateway.protos.Reply.newBuilder()
+    // Construct using org.gateway.protos.ValidateTokenResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -443,11 +325,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      masterip_ = "";
-
       message_ = "";
-
-      token_ = "";
 
       return this;
     }
@@ -455,17 +333,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.gateway.protos.GatewayComm.internal_static_stream_Reply_descriptor;
+      return org.gateway.protos.GatewayComm.internal_static_stream_ValidateTokenResponse_descriptor;
     }
 
     @java.lang.Override
-    public org.gateway.protos.Reply getDefaultInstanceForType() {
-      return org.gateway.protos.Reply.getDefaultInstance();
+    public org.gateway.protos.ValidateTokenResponse getDefaultInstanceForType() {
+      return org.gateway.protos.ValidateTokenResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public org.gateway.protos.Reply build() {
-      org.gateway.protos.Reply result = buildPartial();
+    public org.gateway.protos.ValidateTokenResponse build() {
+      org.gateway.protos.ValidateTokenResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -473,11 +351,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public org.gateway.protos.Reply buildPartial() {
-      org.gateway.protos.Reply result = new org.gateway.protos.Reply(this);
-      result.masterip_ = masterip_;
+    public org.gateway.protos.ValidateTokenResponse buildPartial() {
+      org.gateway.protos.ValidateTokenResponse result = new org.gateway.protos.ValidateTokenResponse(this);
       result.message_ = message_;
-      result.token_ = token_;
       onBuilt();
       return result;
     }
@@ -516,26 +392,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.gateway.protos.Reply) {
-        return mergeFrom((org.gateway.protos.Reply)other);
+      if (other instanceof org.gateway.protos.ValidateTokenResponse) {
+        return mergeFrom((org.gateway.protos.ValidateTokenResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(org.gateway.protos.Reply other) {
-      if (other == org.gateway.protos.Reply.getDefaultInstance()) return this;
-      if (!other.getMasterip().isEmpty()) {
-        masterip_ = other.masterip_;
-        onChanged();
-      }
+    public Builder mergeFrom(org.gateway.protos.ValidateTokenResponse other) {
+      if (other == org.gateway.protos.ValidateTokenResponse.getDefaultInstance()) return this;
       if (!other.getMessage().isEmpty()) {
         message_ = other.message_;
-        onChanged();
-      }
-      if (!other.getToken().isEmpty()) {
-        token_ = other.token_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -553,11 +421,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      org.gateway.protos.Reply parsedMessage = null;
+      org.gateway.protos.ValidateTokenResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (org.gateway.protos.Reply) e.getUnfinishedMessage();
+        parsedMessage = (org.gateway.protos.ValidateTokenResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -567,89 +435,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object masterip_ = "";
-    /**
-     * <code>string masterip = 1;</code>
-     * @return The masterip.
-     */
-    public java.lang.String getMasterip() {
-      java.lang.Object ref = masterip_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        masterip_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string masterip = 1;</code>
-     * @return The bytes for masterip.
-     */
-    public com.google.protobuf.ByteString
-        getMasteripBytes() {
-      java.lang.Object ref = masterip_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        masterip_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string masterip = 1;</code>
-     * @param value The masterip to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMasterip(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      masterip_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string masterip = 1;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearMasterip() {
-      
-      masterip_ = getDefaultInstance().getMasterip();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string masterip = 1;</code>
-     * @param value The bytes for masterip to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMasteripBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      masterip_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object message_ = "";
     /**
      * <pre>
-     * Will return ERROR or SUCCESS
+     * returns VALID or INVALID
      * </pre>
      *
-     * <code>string message = 2;</code>
+     * <code>string message = 1;</code>
      * @return The message.
      */
     public java.lang.String getMessage() {
@@ -666,10 +458,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Will return ERROR or SUCCESS
+     * returns VALID or INVALID
      * </pre>
      *
-     * <code>string message = 2;</code>
+     * <code>string message = 1;</code>
      * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
@@ -687,10 +479,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Will return ERROR or SUCCESS
+     * returns VALID or INVALID
      * </pre>
      *
-     * <code>string message = 2;</code>
+     * <code>string message = 1;</code>
      * @param value The message to set.
      * @return This builder for chaining.
      */
@@ -706,10 +498,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Will return ERROR or SUCCESS
+     * returns VALID or INVALID
      * </pre>
      *
-     * <code>string message = 2;</code>
+     * <code>string message = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearMessage() {
@@ -720,10 +512,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Will return ERROR or SUCCESS
+     * returns VALID or INVALID
      * </pre>
      *
-     * <code>string message = 2;</code>
+     * <code>string message = 1;</code>
      * @param value The bytes for message to set.
      * @return This builder for chaining.
      */
@@ -735,102 +527,6 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       message_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object token_ = "";
-    /**
-     * <pre>
-     * Valid for 1 hour
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The token.
-     */
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        token_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Valid for 1 hour
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The bytes for token.
-     */
-    public com.google.protobuf.ByteString
-        getTokenBytes() {
-      java.lang.Object ref = token_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        token_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Valid for 1 hour
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @param value The token to set.
-     * @return This builder for chaining.
-     */
-    public Builder setToken(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      token_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Valid for 1 hour
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearToken() {
-      
-      token_ = getDefaultInstance().getToken();
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Valid for 1 hour
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @param value The bytes for token to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTokenBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      token_ = value;
       onChanged();
       return this;
     }
@@ -847,41 +543,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:stream.Reply)
+    // @@protoc_insertion_point(builder_scope:stream.ValidateTokenResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:stream.Reply)
-  private static final org.gateway.protos.Reply DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:stream.ValidateTokenResponse)
+  private static final org.gateway.protos.ValidateTokenResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new org.gateway.protos.Reply();
+    DEFAULT_INSTANCE = new org.gateway.protos.ValidateTokenResponse();
   }
 
-  public static org.gateway.protos.Reply getDefaultInstance() {
+  public static org.gateway.protos.ValidateTokenResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Reply>
-      PARSER = new com.google.protobuf.AbstractParser<Reply>() {
+  private static final com.google.protobuf.Parser<ValidateTokenResponse>
+      PARSER = new com.google.protobuf.AbstractParser<ValidateTokenResponse>() {
     @java.lang.Override
-    public Reply parsePartialFrom(
+    public ValidateTokenResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Reply(input, extensionRegistry);
+      return new ValidateTokenResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Reply> parser() {
+  public static com.google.protobuf.Parser<ValidateTokenResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Reply> getParserForType() {
+  public com.google.protobuf.Parser<ValidateTokenResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public org.gateway.protos.Reply getDefaultInstanceForType() {
+  public org.gateway.protos.ValidateTokenResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

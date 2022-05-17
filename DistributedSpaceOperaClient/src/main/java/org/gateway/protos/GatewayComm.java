@@ -25,15 +25,35 @@ public final class GatewayComm {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stream_Reply_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_stream_LoginRequest_descriptor;
+    internal_static_stream_UploadRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_stream_LoginRequest_fieldAccessorTable;
+      internal_static_stream_UploadRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_stream_LoginReply_descriptor;
+    internal_static_stream_UploadResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_stream_LoginReply_fieldAccessorTable;
+      internal_static_stream_UploadResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_DownloadRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_DownloadRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_DownloadResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_DownloadResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_ValidateTokenRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_ValidateTokenRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_ValidateTokenResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_ValidateTokenResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -43,15 +63,26 @@ public final class GatewayComm {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022gateway-comm.proto\022\006stream\")\n\007Request\022" +
-      "\014\n\004name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\031\n\005Reply" +
-      "\022\020\n\010masterip\030\001 \001(\t\"3\n\014LoginRequest\022\021\n\tcl" +
-      "ient_ip\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"(\n\nLogin" +
-      "Reply\022\013\n\003msg\030\001 \001(\t\022\r\n\005token\030\002 \001(\t2q\n\014Aut" +
-      "henticate\022,\n\010Register\022\017.stream.Request\032\r" +
-      ".stream.Reply\"\000\0223\n\005Login\022\024.stream.LoginR" +
-      "equest\032\022.stream.LoginReply\"\000B\026\n\022org.gate" +
-      "way.protosP\001b\006proto3"
+      "\n\022gateway-comm.proto\022\006stream\"5\n\007Request\022" +
+      "\n\n\002ip\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\022\014\n\004type\030\003 " +
+      "\001(\t\"9\n\005Reply\022\020\n\010masterip\030\001 \001(\t\022\017\n\007messag" +
+      "e\030\002 \001(\t\022\r\n\005token\030\003 \001(\t\"U\n\rUploadRequest\022" +
+      "\021\n\tclient_ip\030\001 \001(\t\022\020\n\010filename\030\002 \001(\t\022\020\n\010" +
+      "filesize\030\003 \001(\003\022\r\n\005token\030\004 \001(\t\"1\n\016UploadR" +
+      "esponse\022\016\n\006nodeip\030\001 \001(\t\022\017\n\007message\030\002 \001(\t" +
+      "\"E\n\017DownloadRequest\022\021\n\tclient_ip\030\001 \001(\t\022\020" +
+      "\n\010filename\030\002 \001(\t\022\r\n\005token\030\003 \001(\t\"3\n\020Downl" +
+      "oadResponse\022\016\n\006nodeip\030\001 \001(\t\022\017\n\007message\030\002" +
+      " \001(\t\"8\n\024ValidateTokenRequest\022\021\n\tclient_i" +
+      "p\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\"(\n\025ValidateTokenR" +
+      "esponse\022\017\n\007message\030\001 \001(\t2\367\001\n\014Authenticat" +
+      "e\022,\n\010Register\022\017.stream.Request\032\r.stream." +
+      "Reply\"\000\022)\n\005Login\022\017.stream.Request\032\r.stre" +
+      "am.Reply\"\000\022C\n\020GetNodeForUpload\022\025.stream." +
+      "UploadRequest\032\026.stream.UploadResponse\"\000\022" +
+      "I\n\022GetNodeForDownload\022\027.stream.DownloadR" +
+      "equest\032\030.stream.DownloadResponse\"\000B\026\n\022or" +
+      "g.gateway.protosP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -62,25 +93,49 @@ public final class GatewayComm {
     internal_static_stream_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_Request_descriptor,
-        new java.lang.String[] { "Name", "Password", });
+        new java.lang.String[] { "Ip", "Password", "Type", });
     internal_static_stream_Reply_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_stream_Reply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_Reply_descriptor,
-        new java.lang.String[] { "Masterip", });
-    internal_static_stream_LoginRequest_descriptor =
+        new java.lang.String[] { "Masterip", "Message", "Token", });
+    internal_static_stream_UploadRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_stream_LoginRequest_fieldAccessorTable = new
+    internal_static_stream_UploadRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_stream_LoginRequest_descriptor,
-        new java.lang.String[] { "ClientIp", "Password", });
-    internal_static_stream_LoginReply_descriptor =
+        internal_static_stream_UploadRequest_descriptor,
+        new java.lang.String[] { "ClientIp", "Filename", "Filesize", "Token", });
+    internal_static_stream_UploadResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_stream_LoginReply_fieldAccessorTable = new
+    internal_static_stream_UploadResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_stream_LoginReply_descriptor,
-        new java.lang.String[] { "Msg", "Token", });
+        internal_static_stream_UploadResponse_descriptor,
+        new java.lang.String[] { "Nodeip", "Message", });
+    internal_static_stream_DownloadRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_stream_DownloadRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_DownloadRequest_descriptor,
+        new java.lang.String[] { "ClientIp", "Filename", "Token", });
+    internal_static_stream_DownloadResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_stream_DownloadResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_DownloadResponse_descriptor,
+        new java.lang.String[] { "Nodeip", "Message", });
+    internal_static_stream_ValidateTokenRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_stream_ValidateTokenRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_ValidateTokenRequest_descriptor,
+        new java.lang.String[] { "ClientIp", "Token", });
+    internal_static_stream_ValidateTokenResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_stream_ValidateTokenResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_ValidateTokenResponse_descriptor,
+        new java.lang.String[] { "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

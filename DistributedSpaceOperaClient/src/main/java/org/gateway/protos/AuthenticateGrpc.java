@@ -46,35 +46,97 @@ public final class AuthenticateGrpc {
     return getRegisterMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest,
-      org.gateway.protos.LoginReply> getLoginMethod;
+  private static volatile io.grpc.MethodDescriptor<org.gateway.protos.Request,
+      org.gateway.protos.Reply> getLoginMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Login",
-      requestType = org.gateway.protos.LoginRequest.class,
-      responseType = org.gateway.protos.LoginReply.class,
+      requestType = org.gateway.protos.Request.class,
+      responseType = org.gateway.protos.Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest,
-      org.gateway.protos.LoginReply> getLoginMethod() {
-    io.grpc.MethodDescriptor<org.gateway.protos.LoginRequest, org.gateway.protos.LoginReply> getLoginMethod;
+  public static io.grpc.MethodDescriptor<org.gateway.protos.Request,
+      org.gateway.protos.Reply> getLoginMethod() {
+    io.grpc.MethodDescriptor<org.gateway.protos.Request, org.gateway.protos.Reply> getLoginMethod;
     if ((getLoginMethod = AuthenticateGrpc.getLoginMethod) == null) {
       synchronized (AuthenticateGrpc.class) {
         if ((getLoginMethod = AuthenticateGrpc.getLoginMethod) == null) {
           AuthenticateGrpc.getLoginMethod = getLoginMethod =
-              io.grpc.MethodDescriptor.<org.gateway.protos.LoginRequest, org.gateway.protos.LoginReply>newBuilder()
+              io.grpc.MethodDescriptor.<org.gateway.protos.Request, org.gateway.protos.Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Login"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.gateway.protos.LoginRequest.getDefaultInstance()))
+                  org.gateway.protos.Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.gateway.protos.LoginReply.getDefaultInstance()))
+                  org.gateway.protos.Reply.getDefaultInstance()))
               .setSchemaDescriptor(new AuthenticateMethodDescriptorSupplier("Login"))
               .build();
         }
       }
     }
     return getLoginMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.gateway.protos.UploadRequest,
+      org.gateway.protos.UploadResponse> getGetNodeForUploadMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetNodeForUpload",
+      requestType = org.gateway.protos.UploadRequest.class,
+      responseType = org.gateway.protos.UploadResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.gateway.protos.UploadRequest,
+      org.gateway.protos.UploadResponse> getGetNodeForUploadMethod() {
+    io.grpc.MethodDescriptor<org.gateway.protos.UploadRequest, org.gateway.protos.UploadResponse> getGetNodeForUploadMethod;
+    if ((getGetNodeForUploadMethod = AuthenticateGrpc.getGetNodeForUploadMethod) == null) {
+      synchronized (AuthenticateGrpc.class) {
+        if ((getGetNodeForUploadMethod = AuthenticateGrpc.getGetNodeForUploadMethod) == null) {
+          AuthenticateGrpc.getGetNodeForUploadMethod = getGetNodeForUploadMethod =
+              io.grpc.MethodDescriptor.<org.gateway.protos.UploadRequest, org.gateway.protos.UploadResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNodeForUpload"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.UploadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.UploadResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthenticateMethodDescriptorSupplier("GetNodeForUpload"))
+              .build();
+        }
+      }
+    }
+    return getGetNodeForUploadMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.gateway.protos.DownloadRequest,
+      org.gateway.protos.DownloadResponse> getGetNodeForDownloadMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetNodeForDownload",
+      requestType = org.gateway.protos.DownloadRequest.class,
+      responseType = org.gateway.protos.DownloadResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.gateway.protos.DownloadRequest,
+      org.gateway.protos.DownloadResponse> getGetNodeForDownloadMethod() {
+    io.grpc.MethodDescriptor<org.gateway.protos.DownloadRequest, org.gateway.protos.DownloadResponse> getGetNodeForDownloadMethod;
+    if ((getGetNodeForDownloadMethod = AuthenticateGrpc.getGetNodeForDownloadMethod) == null) {
+      synchronized (AuthenticateGrpc.class) {
+        if ((getGetNodeForDownloadMethod = AuthenticateGrpc.getGetNodeForDownloadMethod) == null) {
+          AuthenticateGrpc.getGetNodeForDownloadMethod = getGetNodeForDownloadMethod =
+              io.grpc.MethodDescriptor.<org.gateway.protos.DownloadRequest, org.gateway.protos.DownloadResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNodeForDownload"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.DownloadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.gateway.protos.DownloadResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthenticateMethodDescriptorSupplier("GetNodeForDownload"))
+              .build();
+        }
+      }
+    }
+    return getGetNodeForDownloadMethod;
   }
 
   /**
@@ -126,6 +188,9 @@ public final class AuthenticateGrpc {
   public static abstract class AuthenticateImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     * Methods for client and node
+     * </pre>
      */
     public void register(org.gateway.protos.Request request,
         io.grpc.stub.StreamObserver<org.gateway.protos.Reply> responseObserver) {
@@ -134,9 +199,26 @@ public final class AuthenticateGrpc {
 
     /**
      */
-    public void login(org.gateway.protos.LoginRequest request,
-        io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply> responseObserver) {
+    public void login(org.gateway.protos.Request request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Methods required for client only
+     * </pre>
+     */
+    public void getNodeForUpload(org.gateway.protos.UploadRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.UploadResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNodeForUploadMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getNodeForDownload(org.gateway.protos.DownloadRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.DownloadResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNodeForDownloadMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -152,9 +234,23 @@ public final class AuthenticateGrpc {
             getLoginMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                org.gateway.protos.LoginRequest,
-                org.gateway.protos.LoginReply>(
+                org.gateway.protos.Request,
+                org.gateway.protos.Reply>(
                   this, METHODID_LOGIN)))
+          .addMethod(
+            getGetNodeForUploadMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.gateway.protos.UploadRequest,
+                org.gateway.protos.UploadResponse>(
+                  this, METHODID_GET_NODE_FOR_UPLOAD)))
+          .addMethod(
+            getGetNodeForDownloadMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.gateway.protos.DownloadRequest,
+                org.gateway.protos.DownloadResponse>(
+                  this, METHODID_GET_NODE_FOR_DOWNLOAD)))
           .build();
     }
   }
@@ -174,6 +270,9 @@ public final class AuthenticateGrpc {
     }
 
     /**
+     * <pre>
+     * Methods for client and node
+     * </pre>
      */
     public void register(org.gateway.protos.Request request,
         io.grpc.stub.StreamObserver<org.gateway.protos.Reply> responseObserver) {
@@ -183,10 +282,29 @@ public final class AuthenticateGrpc {
 
     /**
      */
-    public void login(org.gateway.protos.LoginRequest request,
-        io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply> responseObserver) {
+    public void login(org.gateway.protos.Request request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Methods required for client only
+     * </pre>
+     */
+    public void getNodeForUpload(org.gateway.protos.UploadRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.UploadResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetNodeForUploadMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getNodeForDownload(org.gateway.protos.DownloadRequest request,
+        io.grpc.stub.StreamObserver<org.gateway.protos.DownloadResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetNodeForDownloadMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -205,6 +323,9 @@ public final class AuthenticateGrpc {
     }
 
     /**
+     * <pre>
+     * Methods for client and node
+     * </pre>
      */
     public org.gateway.protos.Reply register(org.gateway.protos.Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -213,9 +334,26 @@ public final class AuthenticateGrpc {
 
     /**
      */
-    public org.gateway.protos.LoginReply login(org.gateway.protos.LoginRequest request) {
+    public org.gateway.protos.Reply login(org.gateway.protos.Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getLoginMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Methods required for client only
+     * </pre>
+     */
+    public org.gateway.protos.UploadResponse getNodeForUpload(org.gateway.protos.UploadRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetNodeForUploadMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.gateway.protos.DownloadResponse getNodeForDownload(org.gateway.protos.DownloadRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetNodeForDownloadMethod(), getCallOptions(), request);
     }
   }
 
@@ -234,6 +372,9 @@ public final class AuthenticateGrpc {
     }
 
     /**
+     * <pre>
+     * Methods for client and node
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.Reply> register(
         org.gateway.protos.Request request) {
@@ -243,15 +384,36 @@ public final class AuthenticateGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.LoginReply> login(
-        org.gateway.protos.LoginRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.Reply> login(
+        org.gateway.protos.Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Methods required for client only
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.UploadResponse> getNodeForUpload(
+        org.gateway.protos.UploadRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetNodeForUploadMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.gateway.protos.DownloadResponse> getNodeForDownload(
+        org.gateway.protos.DownloadRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetNodeForDownloadMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_REGISTER = 0;
   private static final int METHODID_LOGIN = 1;
+  private static final int METHODID_GET_NODE_FOR_UPLOAD = 2;
+  private static final int METHODID_GET_NODE_FOR_DOWNLOAD = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -275,8 +437,16 @@ public final class AuthenticateGrpc {
               (io.grpc.stub.StreamObserver<org.gateway.protos.Reply>) responseObserver);
           break;
         case METHODID_LOGIN:
-          serviceImpl.login((org.gateway.protos.LoginRequest) request,
-              (io.grpc.stub.StreamObserver<org.gateway.protos.LoginReply>) responseObserver);
+          serviceImpl.login((org.gateway.protos.Request) request,
+              (io.grpc.stub.StreamObserver<org.gateway.protos.Reply>) responseObserver);
+          break;
+        case METHODID_GET_NODE_FOR_UPLOAD:
+          serviceImpl.getNodeForUpload((org.gateway.protos.UploadRequest) request,
+              (io.grpc.stub.StreamObserver<org.gateway.protos.UploadResponse>) responseObserver);
+          break;
+        case METHODID_GET_NODE_FOR_DOWNLOAD:
+          serviceImpl.getNodeForDownload((org.gateway.protos.DownloadRequest) request,
+              (io.grpc.stub.StreamObserver<org.gateway.protos.DownloadResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -341,6 +511,8 @@ public final class AuthenticateGrpc {
               .setSchemaDescriptor(new AuthenticateFileDescriptorSupplier())
               .addMethod(getRegisterMethod())
               .addMethod(getLoginMethod())
+              .addMethod(getGetNodeForUploadMethod())
+              .addMethod(getGetNodeForDownloadMethod())
               .build();
         }
       }
