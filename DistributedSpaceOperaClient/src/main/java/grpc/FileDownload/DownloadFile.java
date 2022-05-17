@@ -1,70 +1,80 @@
 package grpc.FileDownload;
 
-import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import org.client.protos.DownloadFileReply;
-import org.client.protos.DownloadFileRequest;
-import org.client.protos.StreamingGrpc;
-import org.gateway.protos.Request;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
+import com.google.protobuf.ByteString;
+
+import org.client.protos.DownloadFileReply;
+import org.client.protos.DownloadFileRequest;
+import org.client.protos.StreamingGrpc;
+import org.gateway.protos.AuthenticateGrpc;
+import org.gateway.protos.DownloadRequest;
+import org.gateway.protos.DownloadResponse;
+import org.master.protos.GetListOfFilesResponse;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 public class DownloadFile {
     private static long clientID;
     private static int port;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         port = Integer.valueOf(args[1]);
-        clientID = Long.valueOf(args[2]);
+        String ipAddress = args[2];
         String fileName = args[3];
-        int algorithm = Integer.valueOf(args[4]);
 
-        ManagedChannel ch = ManagedChannelBuilder.forAddress(args[0], DownloadFile.port).usePlaintext().build();
+        DownloadRequest.Builder dbld = DownloadRequest.newBuilder();
+        dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
+        dbld.setFilename(fileName);
+        dbld.setToken("");
+        dbld.setTokenBytes(ByteString.fromHex(""));
 
-        StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(ch);
+        ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
+        AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
 
-//        boolean last = forAddressalse;
-//        long offset = -1;
-//        long destination = 0;
-//        long responseTime = 200;
-//        long chunkSize = 4096;
-//        int index = 0;
-//        boolean slowStartCompleted = false;
-//        long timeSum = 0;
-//        double averageTime = 0;
-//        double averageChunkSize = 0;
+        DownloadResponse res = gatewayStub.getNodeForDownload(dbld.build());
+        System.out.println("Download File Node IP: " + res.getNodeip());
+        System.out.println("Download File Message: " + res.getMessage());
+
+        GetListOfFilesResponse.Builder filesBld = GetListOfFilesResponse.newBuilder();
+        System.out.println("Get List of Files: " + filesBld.getFilenames(1));
+
+        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), port).usePlaintext().build();
+        StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(nodeChannel);
+        FileInputStream fin = new FileInputStream(
+                "/Users/adarshpatil/Documents/Masters/Sem 2/275 Gash/Final Project/client-cli/DistributedSpaceOperaClient/src/main/java/grpc/FileDownload/testout.txt");
+
         String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
-//        while (!last) {
-            DownloadFileRequest.Builder bld = DownloadFileRequest.newBuilder();
-            bld.setFilename(fileName);
-            long start = System.currentTimeMillis();
-            Iterator<DownloadFileReply> downloadFileReplyIterator;
+        DownloadFileRequest.Builder bld = DownloadFileRequest.newBuilder();
+        bld.setFilename(fileName);
+        bld.setToken("");
 
-            try {
-                downloadFileReplyIterator = stub.downloadFile(bld.build());
+        Iterator<DownloadFileReply> downloadFileReplyIterator;
 
-                for (int i = 1; downloadFileReplyIterator.hasNext(); i++) {
-                    DownloadFileReply r = downloadFileReplyIterator.next();
+        try {
+            downloadFileReplyIterator = stub.downloadFile(bld.build());
 
-                        writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp,
-                            r.getPayload());
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            for (int i = 1; downloadFileReplyIterator.hasNext(); i++) {
+                DownloadFileReply r = downloadFileReplyIterator.next();
+
+                writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp,
+                        r.getPayload());
             }
-            //System.out.println("Client: " + r.getLast());
-            //last = r.getLast();
-//        }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-        ch.shutdown();
+        gatewayChannel.shutdown();
+        nodeChannel.shutdown();
     }
 
     static void writeToFile(String path, ByteString data) throws IOException {
