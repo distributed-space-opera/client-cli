@@ -38,7 +38,21 @@ public class FileUpload {
 
         ManagedChannel ch = ManagedChannelBuilder.forAddress("localhost",  ).usePlaintext().build();
         StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(ch).uploadFile(responseObserver);
+
+        try {
+            File tokenFile = new File("filename.txt");
+            if (tokenFile.createNewFile()) {
+                System.out.println("File created: " + tokenFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
         try{
+
             // input file for testing
             Path path = Paths.get("src/test/resources/input/java_input.pdf");
 
