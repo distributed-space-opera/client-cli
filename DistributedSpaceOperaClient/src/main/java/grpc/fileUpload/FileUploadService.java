@@ -1,7 +1,7 @@
 package grpc.fileUpload;
 
 import java.io.IOException;
-import java.io.OutputStream
+import java.io.OutputStream;
 
 import io.grpc.stub.StreamObserver;
 import org.client.protos.StreamingGrpc;

@@ -15,8 +15,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class FileUpload {
+
+    private static File tokenFile;
 
     public static void main(String[] args) {
         StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
@@ -36,17 +39,42 @@ public class FileUpload {
             }
         };
 
-        ManagedChannel ch = ManagedChannelBuilder.forAddress("localhost",  ).usePlaintext().build();
+        ManagedChannel ch = ManagedChannelBuilder.forAddress("3.144.5.32",  50051).usePlaintext().build();
         StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(ch).uploadFile(responseObserver);
 
+        //create token file
         try {
-            File tokenFile = new File("filename.txt");
+            tokenFile = new File("token.txt");
             if (tokenFile.createNewFile()) {
                 System.out.println("File created: " + tokenFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
         } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        //write to token file
+        try {
+            FileWriter myWriter = new FileWriter(tokenFile);
+            myWriter.write("Tokens in Java might be tricky, but it is fun enough!");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        //read from file
+        try {
+            Scanner myReader = new Scanner(tokenFile);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
