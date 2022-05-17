@@ -45,8 +45,6 @@ public class DownloadFile {
         System.out.println("Download File Node IP: " + res.getNodeip());
         System.out.println("Download File Message: " + res.getMessage());
 
-        GetListOfFilesResponse.Builder filesBld = GetListOfFilesResponse.newBuilder();
-        System.out.println("Get List of Files: " + filesBld.getFilenames(1));
 
         ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), port).usePlaintext().build();
         StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(nodeChannel);
