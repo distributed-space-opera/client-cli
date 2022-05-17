@@ -1,21 +1,26 @@
 package grpc.FileDownload;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+
 import org.client.protos.DownloadFileReply;
 import org.client.protos.DownloadFileRequest;
 import org.client.protos.StreamingGrpc;
 import org.gateway.protos.AuthenticateGrpc;
 import org.gateway.protos.DownloadRequest;
 import org.gateway.protos.DownloadResponse;
+import org.master.protos.GetListOfFilesResponse;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 public class DownloadFile {
     private static long clientID;
@@ -40,9 +45,13 @@ public class DownloadFile {
         System.out.println("Download File Node IP: " + res.getNodeip());
         System.out.println("Download File Message: " + res.getMessage());
 
+        GetListOfFilesResponse.Builder filesBld = GetListOfFilesResponse.newBuilder();
+        System.out.println("Get List of Files: " + filesBld.getFilenames(1));
+
         ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), port).usePlaintext().build();
         StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(nodeChannel);
-        FileInputStream fin = new FileInputStream("/Users/adarshpatil/Documents/Masters/Sem 2/275 Gash/Final Project/client-cli/DistributedSpaceOperaClient/src/main/java/grpc/FileDownload/testout.txt");
+        FileInputStream fin = new FileInputStream(
+                "/Users/adarshpatil/Documents/Masters/Sem 2/275 Gash/Final Project/client-cli/DistributedSpaceOperaClient/src/main/java/grpc/FileDownload/testout.txt");
 
         String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
         DownloadFileRequest.Builder bld = DownloadFileRequest.newBuilder();
@@ -57,7 +66,7 @@ public class DownloadFile {
             for (int i = 1; downloadFileReplyIterator.hasNext(); i++) {
                 DownloadFileReply r = downloadFileReplyIterator.next();
 
-                    writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp,
+                writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp,
                         r.getPayload());
             }
         } catch (IOException ex) {
