@@ -7,9 +7,12 @@ import io.grpc.stub.StreamObserver;
 import org.client.protos.StreamingGrpc;
 import org.client.protos.UploadFileReply;
 import org.client.protos.UploadFileRequest;
+import org.gateway.protos.*;
 
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,9 +22,28 @@ import java.util.Scanner;
 
 public class FileUpload {
 
+    private static long clientID;
+    private static int port;
     private static File tokenFile;
+    private static InputStream inputStream;
 
     public static void main(String[] args) {
+        port = Integer.valueOf(args[1]);
+        String ipAddress = args[2];
+        String fileName = args[3];
+        long inputFileSize = 0;
+
+
+        // input file for testing
+        Path filePath = Paths.get("src/test/resources/input/java_input.pdf");
+
+        // upload file as chunk
+        try {
+            inputStream = Files.newInputStream(filePath);
+        } catch(IOException e){
+            System.out.println("IO Exception");
+            e.printStackTrace();
+        }
         StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
             @Override
             public void onNext(UploadFileReply uploadFileReply) {
@@ -39,8 +61,11 @@ public class FileUpload {
             }
         };
 
-        ManagedChannel ch = ManagedChannelBuilder.forAddress("3.144.5.32",  50051).usePlaintext().build();
-        StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(ch).uploadFile(responseObserver);
+        ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
+        AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
+
+        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress("3.144.5.32",  50051).usePlaintext().build();
+        StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(nodeChannel).uploadFile(responseObserver);
 
         //create token file
         try {
@@ -79,14 +104,33 @@ public class FileUpload {
             e.printStackTrace();
         }
 
+        try {
+            inputFileSize = Files.size(filePath);
+        }catch (IOException e){
+            System.out.println("IO Exception");
+            e.printStackTrace();
+        }
+
+        //uploadRequest
+        try {
+            UploadRequest.Builder dbld = UploadRequest.newBuilder();
+            dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
+            dbld.setFilename(fileName);
+            dbld.setFilesize(inputFileSize);
+            dbld.setToken("");
+
+            UploadResponse uploadRes = gatewayStub.getNodeForUpload(dbld.build());
+            System.out.println("Upload File Node IP: " + uploadRes.getNodeip());
+            System.out.println("Upload File Message: " + uploadRes.getMessage());
+        } catch(UnknownHostException e){
+            System.out.println("UploadRequest Error");
+            e.printStackTrace();
+        }
+
+
+
+        //uploadFileRequest
         try{
-
-            // input file for testing
-            Path path = Paths.get("src/test/resources/input/java_input.pdf");
-
-
-            // upload file as chunk
-            InputStream inputStream = Files.newInputStream(path);
             byte[] bytes = new byte[4096];
             int size;
             while ((size = inputStream.read(bytes)) > 0){
@@ -95,7 +139,7 @@ public class FileUpload {
                 requestObserver.onNext(builder.build());
             }
 
-// close the stream
+            // close the stream
             inputStream.close();
             responseObserver.onCompleted();
         } catch (RuntimeException | IOException e) {

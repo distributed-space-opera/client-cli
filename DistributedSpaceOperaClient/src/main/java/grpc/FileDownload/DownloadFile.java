@@ -36,7 +36,7 @@ public class DownloadFile {
         dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
         dbld.setFilename(fileName);
         dbld.setToken("");
-        dbld.setTokenBytes(ByteString.fromHex(""));
+        //dbld.setTokenBytes(ByteString.fromHex(""));
 
         ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
         AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
