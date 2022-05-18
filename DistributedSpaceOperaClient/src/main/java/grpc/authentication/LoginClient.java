@@ -9,9 +9,12 @@ import org.gateway.protos.Request;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginClient {
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException, NoSuchAlgorithmException {
         PropertiesHelper propertiesHelper = new PropertiesHelper();
 
         String connectionAddr = args[0];
@@ -25,7 +28,7 @@ public class LoginClient {
 
         Request.Builder loginRequest = Request.newBuilder();
         loginRequest.setIp(clientIp);
-        loginRequest.setPassword(password);
+        loginRequest.setPassword(encryptPassword(password));
         loginRequest.setType("CLIENT");
 
         Reply loginReply = authenticateBlockingStub.login(loginRequest.build());
@@ -39,5 +42,12 @@ public class LoginClient {
 
         channel.shutdown();
 
+    }
+
+    private static String encryptPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hashedPassBytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+        String hashedPass = new String(hashedPassBytes);
+        return hashedPass;
     }
 }
