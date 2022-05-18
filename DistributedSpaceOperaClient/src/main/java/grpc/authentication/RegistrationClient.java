@@ -60,7 +60,6 @@ public class RegistrationClient {
     private static String encryptPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         byte[] hashedPassBytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
-        String hashedPass = new String(hashedPassBytes);
-        return hashedPass;
+        return new String(hashedPassBytes);
     }
 }

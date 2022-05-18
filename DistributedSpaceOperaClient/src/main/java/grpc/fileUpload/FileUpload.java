@@ -1,6 +1,7 @@
 package grpc.fileUpload;
 
 import com.google.protobuf.ByteString;
+import grpc.PropertiesHelper;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -8,6 +9,8 @@ import org.client.protos.StreamingGrpc;
 import org.client.protos.UploadFileReply;
 import org.client.protos.UploadFileRequest;
 import org.gateway.protos.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.io.*;
@@ -22,15 +25,19 @@ import java.util.Scanner;
 
 public class FileUpload {
 
-    private static File tokenFile;
     private static InputStream inputStream;
+    private static final int CHUNK_SIZE = 4096;
 
     public static void main(String[] args) {
+
+        Logger logger = LoggerFactory.getLogger("FileUpload");
+
         int port = Integer.parseInt(args[1]);
         String ipAddress = args[2];
         String path = args[3];
         long inputFileSize = 0;
-        String fileName = "";
+        String[] split = path.split("/");
+        String fileName = split[split.length - 1];
 
 
         // input file for testing
@@ -66,47 +73,17 @@ public class FileUpload {
         ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress("3.144.5.32",  50051).usePlaintext().build();
         StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(nodeChannel).uploadFile(responseObserver);
 
-        //create token file
-        try {
-            tokenFile = new File("token.txt");
-            if (tokenFile.createNewFile()) {
-                System.out.println("File created: " + tokenFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+        PropertiesHelper helper = new PropertiesHelper();
+        String token = helper.getAuthProperty("jwtToken");
 
-        //write to token file
-        try {
-            FileWriter myWriter = new FileWriter(tokenFile);
-            myWriter.write("Tokens in Java might be tricky, but it is fun enough!");
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-        //read from file
-        try {
-            Scanner myReader = new Scanner(tokenFile);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        if (!token.isBlank()) {
+            logger.error("Please Login First");
         }
 
         try {
             inputFileSize = Files.size(filePath);
         }catch (IOException e){
-            System.out.println("IO Exception");
+            logger.error("IO Exception");
             e.printStackTrace();
         }
 
@@ -116,21 +93,21 @@ public class FileUpload {
             dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
             dbld.setFilename(fileName);
             dbld.setFilesize(inputFileSize);
-            dbld.setToken("");
+            dbld.setToken(token);
 
             UploadResponse uploadRes = gatewayStub.getNodeForUpload(dbld.build());
-            System.out.println("Upload File Node IP: " + uploadRes.getNodeip());
-            System.out.println("Upload File Message: " + uploadRes.getMessage());
+            logger.info("Upload File Node IP: " + uploadRes.getNodeip());
+            logger.info("Upload File Message: " + uploadRes.getMessage());
         } catch(UnknownHostException e){
-            System.out.println("UploadRequest Error");
+            logger.error("UploadRequest Error");
             e.printStackTrace();
         }
 
-
+        gatewayChannel.shutdown();
 
         //uploadFileRequest
         try{
-            byte[] bytes = new byte[4096];
+            byte[] bytes = new byte[CHUNK_SIZE];
             int size;
             while ((size = inputStream.read(bytes)) > 0){
                 UploadFileRequest.Builder builder = UploadFileRequest.newBuilder();
@@ -145,6 +122,7 @@ public class FileUpload {
             responseObserver.onError(e);
         }
         responseObserver.onCompleted();
+        nodeChannel.shutdown();
     }
 
 

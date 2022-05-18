@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import com.google.protobuf.ByteString;
 
+import grpc.PropertiesHelper;
 import org.client.protos.DownloadFileReply;
 import org.client.protos.DownloadFileRequest;
 import org.client.protos.StreamingGrpc;
@@ -21,6 +22,8 @@ import org.master.protos.GetListOfFilesResponse;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DownloadFile {
     private static long clientID;
@@ -28,33 +31,41 @@ public class DownloadFile {
 
     public static void main(String[] args) throws IOException {
 
-        port = Integer.valueOf(args[1]);
+        Logger logger = LoggerFactory.getLogger("FileDownload");
+
+        port = Integer.parseInt(args[1]);
         String ipAddress = args[2];
         String fileName = args[3];
+//        String clientIp = String.valueOf(InetAddress.getLocalHost());
+        String clientIp = args[4];
+
+        PropertiesHelper helper = new PropertiesHelper();
+        String token = helper.getAuthProperty("jwtToken");
+
+        if (!token.isBlank()) {
+            logger.error("Please Login First");
+        }
 
         DownloadRequest.Builder dbld = DownloadRequest.newBuilder();
-        dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
+        dbld.setClientIp(clientIp);
         dbld.setFilename(fileName);
-        dbld.setToken("");
-        //dbld.setTokenBytes(ByteString.fromHex(""));
+        dbld.setToken(token);
 
         ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
         AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
 
         DownloadResponse res = gatewayStub.getNodeForDownload(dbld.build());
-        System.out.println("Download File Node IP: " + res.getNodeip());
-        System.out.println("Download File Message: " + res.getMessage());
+        logger.info("Download File Node IP: " + res.getNodeip());
+        logger.info("Download File Message: " + res.getMessage());
 
 
         ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), port).usePlaintext().build();
         StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(nodeChannel);
-        FileInputStream fin = new FileInputStream(
-                "/Users/adarshpatil/Documents/Masters/Sem 2/275 Gash/Final Project/client-cli/DistributedSpaceOperaClient/src/main/java/grpc/FileDownload/testout.txt");
 
         String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
         DownloadFileRequest.Builder bld = DownloadFileRequest.newBuilder();
         bld.setFilename(fileName);
-        bld.setToken("");
+        bld.setToken(token);
 
         Iterator<DownloadFileReply> downloadFileReplyIterator;
 
@@ -64,8 +75,7 @@ public class DownloadFile {
             for (int i = 1; downloadFileReplyIterator.hasNext(); i++) {
                 DownloadFileReply r = downloadFileReplyIterator.next();
 
-                writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp,
-                        r.getPayload());
+                writeToFile("./received/" + fileName + "_" + clientID + "_" + timestamp, r.getPayload());
             }
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -43,10 +43,12 @@ public class LoginClient {
         logger.info("Token: " + loginReply.getToken());
         logger.info("Master IP: " + loginReply.getMasterip());
 
-        propertiesHelper.setAuthProperty("jwtToken", loginReply.getToken());
-        propertiesHelper.setAuthProperty("masterIp", loginReply.getMasterip());
+        if (!loginReply.getToken().isBlank()) {
+            propertiesHelper.setAuthProperty("jwtToken", loginReply.getToken());
+            propertiesHelper.setAuthProperty("masterIp", loginReply.getMasterip());
 
-        propertiesHelper.saveProperties();
+            propertiesHelper.saveProperties();
+        }
 
         channel.shutdown();
 
