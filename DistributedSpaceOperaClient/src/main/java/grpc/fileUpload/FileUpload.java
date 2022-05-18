@@ -22,20 +22,19 @@ import java.util.Scanner;
 
 public class FileUpload {
 
-    private static long clientID;
-    private static int port;
     private static File tokenFile;
     private static InputStream inputStream;
 
     public static void main(String[] args) {
-        port = Integer.valueOf(args[1]);
+        int port = Integer.parseInt(args[1]);
         String ipAddress = args[2];
-        String fileName = args[3];
+        String path = args[3];
         long inputFileSize = 0;
+        String fileName = "";
 
 
         // input file for testing
-        Path filePath = Paths.get("src/test/resources/input/java_input.pdf");
+        Path filePath = Paths.get(path);
 
         // upload file as chunk
         try {

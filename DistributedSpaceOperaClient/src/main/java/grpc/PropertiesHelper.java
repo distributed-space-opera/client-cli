@@ -1,12 +1,10 @@
 package grpc;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 public class PropertiesHelper {
-    String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    String rootPath = "./src/main/resources/";
     String authPropertiesPath = rootPath + "auth.properties";
 
     Properties authProps;
@@ -17,6 +15,12 @@ public class PropertiesHelper {
             authProps.load(new FileInputStream(authPropertiesPath));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void saveProperties () throws IOException {
+        if(authProps != null) {
+            authProps.store(new FileOutputStream(authPropertiesPath), null);
         }
     }
 

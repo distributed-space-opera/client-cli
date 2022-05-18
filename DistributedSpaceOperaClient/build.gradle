@@ -52,12 +52,12 @@ test {
 }
 
 task uploadFile(type:JavaExec) {
-    main = 'grpc.route.server.RequestServiceImpl'
+    main = 'grpc.fileUpload.FileUpload'
     classpath = sourceSets.main.runtimeClasspath
 }
 
 task downloadFile(type:JavaExec) {
-    main = 'grpc.route.client.Client'
+    main = 'grpc.FileDownload.DownloadFile'
     classpath = sourceSets.main.runtimeClasspath
 }
 task listFiles(type:JavaExec) {
