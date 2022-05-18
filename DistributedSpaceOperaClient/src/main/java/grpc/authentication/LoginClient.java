@@ -12,9 +12,13 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginClient {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException, UnknownHostException, NoSuchAlgorithmException {
         Logger logger = LoggerFactory.getLogger("Login");
         PropertiesHelper propertiesHelper = new PropertiesHelper();
 
@@ -30,7 +34,7 @@ public class LoginClient {
 
         Request.Builder loginRequest = Request.newBuilder();
         loginRequest.setIp(clientIp);
-        loginRequest.setPassword(password);
+        loginRequest.setPassword(encryptPassword(password));
         loginRequest.setType("CLIENT");
 
         Reply loginReply = authenticateBlockingStub.login(loginRequest.build());
@@ -46,5 +50,11 @@ public class LoginClient {
 
         channel.shutdown();
 
+    }
+
+    private static String encryptPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hashedPassBytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+        return new String(hashedPassBytes);
     }
 }
