@@ -96,13 +96,13 @@ public class DistQuadClient {
         }
     }
 
-    public void processUpload(String filePath) throws InterruptedException {
+    public void processUpload(String filePath, String fileName) throws InterruptedException {
 
 
         try {
 //            String filePath = "/Users/harsha/Desktop/San Jose State University - Connect2.pdf";
             String[] fileArray = filePath.split("/");
-            String fileName = fileArray[fileArray.length - 1] + "2";
+            //String fileName = fileArray[fileArray.length - 1] + "5";
             FileInputStream fileInputStream = new FileInputStream(filePath);
             ByteString fileBytes = ByteString.readFrom(fileInputStream);
             StreamObserver<UploadFileReply> uploadFileReplyStreamObserver = new StreamObserver<>() {
@@ -134,6 +134,7 @@ public class DistQuadClient {
             }
             uploadFileRequestStreamObserver.onCompleted();
             fileInputStream.close();
+
             Thread.sleep(100000);
         } catch (FileNotFoundException e) {
             logger.log(Level.SEVERE, "FileNotFoundException occurred :{0}", e);

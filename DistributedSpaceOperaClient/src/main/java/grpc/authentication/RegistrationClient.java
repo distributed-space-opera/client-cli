@@ -19,11 +19,15 @@ public class RegistrationClient {
     public static void main(String[] args) throws UnknownHostException, NoSuchAlgorithmException {
         Logger logger = LoggerFactory.getLogger("Registration");
 
-        String connectionAddr = args[0];
-        int port = Integer.parseInt(args[1]);
-        String password = args[2];
+        //String connectionAddr = args[0];
+        String connectionAddr = "192.168.43.48";
+        //int port = Integer.parseInt(args[1]);
+        int port = 3000;
+        //String password = args[2];
+        String password = "password";
         //String ip = InetAddress.getLocalHost().getHostAddress();
-        String ip = args[3];
+        //String ip = args[3];
+        String ip = "192.168.43.31";
 
         if (!validatePassword(password)) {
             System.out.println("Invalid password length. Length must be between 6 to 20");

@@ -37,13 +37,16 @@ public class FileUpload {
         String path = args[3];
         long inputFileSize = 0;
         String[] split = path.split("/");
-        String fileName = split[split.length - 1];
+        for (int i = 0; i < 10; i++) {
+            String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+            String fileName = split[split.length - 1] + "_" + timestamp + "_" + i;
+            logger.info("Filename: " + fileName);
 
 
-        // input file for testing
-        Path filePath = Paths.get(path);
+            // input file for testing
+            Path filePath = Paths.get(path);
 
-        // upload file as chunk
+            // upload file as chunk
 //        try {
 //            inputStream = Files.newInputStream(filePath);
 //        } catch(IOException e){
@@ -52,27 +55,27 @@ public class FileUpload {
 //        }
 
 
-        ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
-        AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
+            ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
+            AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
 
 
-        PropertiesHelper helper = new PropertiesHelper();
-        String token = helper.getAuthProperty("jwtToken");
+            PropertiesHelper helper = new PropertiesHelper();
+            String token = helper.getAuthProperty("jwtToken");
 
-        if (!token.isBlank()) {
-            logger.error("Please Login First");
-        }
+            if (!token.isBlank()) {
+                logger.error("Please Login First");
+            }
 
-        try {
-            inputFileSize = Files.size(filePath);
-        }catch (IOException e){
-            logger.error("IO Exception");
-            e.printStackTrace();
-        }
+            try {
+                inputFileSize = Files.size(filePath);
+            } catch (IOException e) {
+                logger.error("IO Exception");
+                e.printStackTrace();
+            }
 
-        UploadResponse uploadRes = null;
+            UploadResponse uploadRes = null;
 
-        //uploadRequest
+            //uploadRequest
 //        try {
             UploadRequest.Builder dbld = UploadRequest.newBuilder();
             dbld.setClientIp(args[2]);
@@ -88,7 +91,7 @@ public class FileUpload {
 //            e.printStackTrace();
 //        }
 
-        gatewayChannel.shutdown();
+            gatewayChannel.shutdown();
 
         /*StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
             @Override
@@ -128,17 +131,21 @@ public class FileUpload {
         }
         responseObserver.onCompleted();
         nodeChannel.shutdown();*/
-        ManagedChannel channel = null;
-        logger.info(uploadRes.getNodeip());
+            ManagedChannel channel = null;
+            logger.info(uploadRes.getNodeip());
 //        try {
-            channel = ManagedChannelBuilder.forAddress(uploadRes.getNodeip() ,6080)
+            String nodeip = uploadRes.getNodeip();
+            //nodeip = "192.168.43.56";
+            channel = ManagedChannelBuilder.forAddress(nodeip, 6080)
                     // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
                     // needing certificates.
                     .usePlaintext()
                     .build();
-        System.out.println("channel"+channel);
+            System.out.println("channel" + channel);
             DistQuadClient client = new DistQuadClient(channel);
-            client.processUpload(path);
+            client.processUpload(path, fileName);
+            channel.shutdown();
+        }
     }
 
 
