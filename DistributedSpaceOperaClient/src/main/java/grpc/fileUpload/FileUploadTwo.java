@@ -1,5 +1,6 @@
 package grpc.fileUpload;
 
+
 import com.google.protobuf.ByteString;
 import grpc.PropertiesHelper;
 import io.grpc.ManagedChannel;
@@ -23,17 +24,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class FileUpload {
+public class FileUploadTwo {
 
     private static InputStream inputStream;
     private static final int CHUNK_SIZE = 4096;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Logger logger = LoggerFactory.getLogger("FileUpload");
 
         int port = Integer.parseInt(args[1]);
-        String ipAddress = args[0];
+        String ipAddress = args[2];
         String path = args[3];
         long inputFileSize = 0;
         String[] split = path.split("/");
@@ -43,18 +44,37 @@ public class FileUpload {
         // input file for testing
         Path filePath = Paths.get(path);
 
-        // upload file as chunk
-//        try {
-//            inputStream = Files.newInputStream(filePath);
-//        } catch(IOException e){
-//            System.out.println("IO Exception");
-//            e.printStackTrace();
-//        }
+
+        try {
+            inputStream = Files.newInputStream(filePath);
+        } catch(IOException e){
+            System.out.println("IO Exception");
+            e.printStackTrace();
+        }
+        StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
+            @Override
+            public void onNext(UploadFileReply uploadFileReply) {
+
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+        };
+
 
 
         ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
         AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
 
+        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress("3.144.5.32",  50051).usePlaintext().build();
+        StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(nodeChannel).uploadFile(responseObserver);
 
         PropertiesHelper helper = new PropertiesHelper();
         String token = helper.getAuthProperty("jwtToken");
@@ -70,45 +90,23 @@ public class FileUpload {
             e.printStackTrace();
         }
 
-        UploadResponse uploadRes = null;
-
         //uploadRequest
-//        try {
+        try {
             UploadRequest.Builder dbld = UploadRequest.newBuilder();
-            dbld.setClientIp(args[2]);
+            dbld.setClientIp(String.valueOf(InetAddress.getLocalHost()));
             dbld.setFilename(fileName);
             dbld.setFilesize(inputFileSize);
             dbld.setToken(token);
 
-            uploadRes = gatewayStub.getNodeForUpload(dbld.build());
+            UploadResponse uploadRes = gatewayStub.getNodeForUpload(dbld.build());
             logger.info("Upload File Node IP: " + uploadRes.getNodeip());
             logger.info("Upload File Message: " + uploadRes.getMessage());
-//        } catch(UnknownHostException e){
-//            logger.error("UploadRequest Error");
-//            e.printStackTrace();
-//        }
+        } catch(UnknownHostException e){
+            logger.error("UploadRequest Error");
+            e.printStackTrace();
+        }
 
         gatewayChannel.shutdown();
-
-        /*StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
-            @Override
-            public void onNext(UploadFileReply uploadFileReply) {
-                logger.debug("onnext" + uploadFileReply.getStatus());
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                logger.debug("onerror" + throwable);
-            }
-
-            @Override
-            public void onCompleted() {
-                logger.debug("oncomplete");
-            }
-        };
-
-        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(uploadRes.getNodeip(),  6080).usePlaintext().build();
-        StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(nodeChannel).uploadFile(responseObserver);
 
         //uploadFileRequest
         try{
@@ -116,7 +114,7 @@ public class FileUpload {
             int size;
             while ((size = inputStream.read(bytes)) > 0){
                 UploadFileRequest.Builder builder = UploadFileRequest.newBuilder();
-                builder.setPayload(ByteString.copyFrom(bytes, 0 , size)).setFilename(fileName);
+                builder.setPayload(ByteString.copyFrom(bytes, 0 , size)).setFilename("test");
                 requestObserver.onNext(builder.build());
             }
 
@@ -127,20 +125,10 @@ public class FileUpload {
             responseObserver.onError(e);
         }
         responseObserver.onCompleted();
-        nodeChannel.shutdown();*/
-        ManagedChannel channel = null;
-        logger.info(uploadRes.getNodeip());
-//        try {
-            channel = ManagedChannelBuilder.forAddress(uploadRes.getNodeip() ,6080)
-                    // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
-                    // needing certificates.
-                    .usePlaintext()
-                    .build();
-        System.out.println("channel"+channel);
-            DistQuadClient client = new DistQuadClient(channel);
-            client.processUpload(path);
+        nodeChannel.shutdown();
     }
 
 
 
 }
+

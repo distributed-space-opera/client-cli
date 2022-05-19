@@ -36,7 +36,8 @@ public class RegistrationClient {
 
         Request.Builder request = Request.newBuilder();
         request.setIp(ip);
-        request.setPassword(encryptPassword(password));
+//        request.setPassword(encryptPassword(password));
+        request.setPassword(password);
         request.setType("CLIENT");
 
         Reply reply = authenticateBlockingStub.register(request.build());

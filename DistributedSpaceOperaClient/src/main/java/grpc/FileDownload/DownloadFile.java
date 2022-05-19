@@ -34,10 +34,10 @@ public class DownloadFile {
         Logger logger = LoggerFactory.getLogger("FileDownload");
 
         port = Integer.parseInt(args[1]);
-        String ipAddress = args[2];
-        String fileName = args[3];
+        String ipAddress = args[0];
+        String fileName = args[2];
 //        String clientIp = String.valueOf(InetAddress.getLocalHost());
-        String clientIp = args[4];
+        String clientIp = args[3];
 
         PropertiesHelper helper = new PropertiesHelper();
         String token = helper.getAuthProperty("jwtToken");
@@ -59,7 +59,7 @@ public class DownloadFile {
         logger.info("Download File Message: " + res.getMessage());
 
 
-        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), port).usePlaintext().build();
+        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(res.getNodeip(), 6080).usePlaintext().build();
         StreamingGrpc.StreamingBlockingStub stub = StreamingGrpc.newBlockingStub(nodeChannel);
 
         String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());

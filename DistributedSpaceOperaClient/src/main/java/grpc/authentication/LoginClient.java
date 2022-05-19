@@ -34,7 +34,8 @@ public class LoginClient {
 
         Request.Builder loginRequest = Request.newBuilder();
         loginRequest.setIp(clientIp);
-        loginRequest.setPassword(encryptPassword(password));
+//        loginRequest.setPassword(encryptPassword(password));
+        loginRequest.setPassword(password);
         loginRequest.setType("CLIENT");
 
         Reply loginReply = authenticateBlockingStub.login(loginRequest.build());
