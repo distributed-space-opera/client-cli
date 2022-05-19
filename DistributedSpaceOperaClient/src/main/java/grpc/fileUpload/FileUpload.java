@@ -64,8 +64,6 @@ public class FileUpload {
 
             UploadResponse uploadRes = null;
 
-            //uploadRequest
-//        try {
             UploadRequest.Builder dbld = UploadRequest.newBuilder();
             dbld.setClientIp(args[2]);
             dbld.setFilename(fileName);
@@ -75,21 +73,15 @@ public class FileUpload {
             uploadRes = gatewayStub.getNodeForUpload(dbld.build());
             logger.info("Upload File Node IP: " + uploadRes.getNodeip());
             logger.info("Upload File Message: " + uploadRes.getMessage());
-//        } catch(UnknownHostException e){
-//            logger.error("UploadRequest Error");
-//            e.printStackTrace();
-//        }
 
             gatewayChannel.shutdown();
 
             ManagedChannel channel = null;
             logger.info(uploadRes.getNodeip());
-//        try {
+
             String nodeip = uploadRes.getNodeip();
 
             channel = ManagedChannelBuilder.forAddress(nodeip, 6080)
-                    // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
-                    // needing certificates.
                     .usePlaintext()
                     .build();
             System.out.println("channel" + channel);

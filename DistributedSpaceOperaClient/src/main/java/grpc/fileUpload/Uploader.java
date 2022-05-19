@@ -20,14 +20,12 @@ public class Uploader {
 
     public Uploader(ManagedChannel channel) {
         streamingStub = StreamingGrpc.newStub(channel);
-
     }
 
 
     public void processUpload(String filePath, String fileName) throws InterruptedException {
         try {
             String[] fileArray = filePath.split("/");
-            //String fileName = fileArray[fileArray.length - 1] + "5";
             FileInputStream fileInputStream = new FileInputStream(filePath);
             ByteString fileBytes = ByteString.readFrom(fileInputStream);
             StreamObserver<UploadFileReply> uploadFileReplyStreamObserver = new StreamObserver<>() {
