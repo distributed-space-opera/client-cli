@@ -42,18 +42,7 @@ public class FileUpload {
             String fileName = split[split.length - 1] + "_" + timestamp + "_" + i;
             logger.info("Filename: " + fileName);
 
-
-            // input file for testing
             Path filePath = Paths.get(path);
-
-            // upload file as chunk
-//        try {
-//            inputStream = Files.newInputStream(filePath);
-//        } catch(IOException e){
-//            System.out.println("IO Exception");
-//            e.printStackTrace();
-//        }
-
 
             ManagedChannel gatewayChannel = ManagedChannelBuilder.forAddress(ipAddress, port).usePlaintext().build();
             AuthenticateGrpc.AuthenticateBlockingStub gatewayStub = AuthenticateGrpc.newBlockingStub(gatewayChannel);
@@ -93,57 +82,19 @@ public class FileUpload {
 
             gatewayChannel.shutdown();
 
-        /*StreamObserver<UploadFileReply> responseObserver = new StreamObserver<UploadFileReply>() {
-            @Override
-            public void onNext(UploadFileReply uploadFileReply) {
-                logger.debug("onnext" + uploadFileReply.getStatus());
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                logger.debug("onerror" + throwable);
-            }
-
-            @Override
-            public void onCompleted() {
-                logger.debug("oncomplete");
-            }
-        };
-
-        ManagedChannel nodeChannel = ManagedChannelBuilder.forAddress(uploadRes.getNodeip(),  6080).usePlaintext().build();
-        StreamObserver<UploadFileRequest> requestObserver = StreamingGrpc.newStub(nodeChannel).uploadFile(responseObserver);
-
-        //uploadFileRequest
-        try{
-            byte[] bytes = new byte[CHUNK_SIZE];
-            int size;
-            while ((size = inputStream.read(bytes)) > 0){
-                UploadFileRequest.Builder builder = UploadFileRequest.newBuilder();
-                builder.setPayload(ByteString.copyFrom(bytes, 0 , size)).setFilename(fileName);
-                requestObserver.onNext(builder.build());
-            }
-
-            // close the stream
-            inputStream.close();
-            responseObserver.onCompleted();
-        } catch (RuntimeException | IOException e) {
-            responseObserver.onError(e);
-        }
-        responseObserver.onCompleted();
-        nodeChannel.shutdown();*/
             ManagedChannel channel = null;
             logger.info(uploadRes.getNodeip());
 //        try {
             String nodeip = uploadRes.getNodeip();
-            //nodeip = "192.168.43.56";
+
             channel = ManagedChannelBuilder.forAddress(nodeip, 6080)
                     // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
                     // needing certificates.
                     .usePlaintext()
                     .build();
             System.out.println("channel" + channel);
-            DistQuadClient client = new DistQuadClient(channel);
-            client.processUpload(path, fileName);
+            Uploader uploader = new Uploader(channel);
+            uploader.processUpload(path, fileName);
             channel.shutdown();
         }
     }
